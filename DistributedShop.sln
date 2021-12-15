@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31320.298
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedShop.Identity", "src\DistributedShop.Identity\DistributedShop.Identity.csproj", "{32C22682-E9E2-41D9-8D4C-2F9C6DBF65D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedShop.Common", "DistributedShop.Common\DistributedShop.Common.csproj", "{3F06430B-F094-4582-A274-A4CA234F45F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedShop.Common", "src\DistributedShop.Common\DistributedShop.Common.csproj", "{3F06430B-F094-4582-A274-A4CA234F45F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
