@@ -1,11 +1,9 @@
 ﻿namespace DistributedShop.Common.Mvc
 {
+    using DistributedShop.Common.Types;
     using Microsoft.Extensions.DependencyInjection;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public static partial class ConfigurationExtensions
     {
