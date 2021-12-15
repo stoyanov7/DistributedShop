@@ -1,10 +1,12 @@
 ﻿namespace DistributedShop.Identity.Domain
 {
+    using DistributedShop.Common.Mongo.Attributes;
     using DistributedShop.Common.Types;
     using Microsoft.AspNetCore.Identity;
     using System;
     using System.Text.RegularExpressions;
 
+    [BsonCollection("users")]
     public class User : IIdentifiable
     {
         private static readonly Regex EmailRegex = new(

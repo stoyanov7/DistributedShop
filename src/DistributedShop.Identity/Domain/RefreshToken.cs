@@ -1,9 +1,11 @@
 ﻿namespace DistributedShop.Identity.Domain
 {
+    using DistributedShop.Common.Mongo.Attributes;
     using DistributedShop.Common.Types;
     using Microsoft.AspNetCore.Identity;
     using System;
 
+    [BsonCollection("refresh-tokens")]
     public class RefreshToken : IIdentifiable
     {
         public RefreshToken(User user, IPasswordHasher<User> passwordHasher)
