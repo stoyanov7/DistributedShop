@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistributedShop.Identity", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistributedShop.Common", "src\DistributedShop.Common\DistributedShop.Common.csproj", "{3F06430B-F094-4582-A274-A4CA234F45F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedShop.Products", "DistributedShop.Products\DistributedShop.Products.csproj", "{4A5D242A-0234-45DE-B86A-8A1415340589}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedShop.Products", "src\DistributedShop.Products\DistributedShop.Products.csproj", "{4A5D242A-0234-45DE-B86A-8A1415340589}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
