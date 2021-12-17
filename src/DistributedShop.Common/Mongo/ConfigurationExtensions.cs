@@ -10,7 +10,7 @@
     {
         public static IServiceCollection AddMongoDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.Configure<MongoDbSettings>(option => configuration.GetSection(nameof(MongoDbSettings)).Bind(option));
+            services.Configure<MongoDbSettings>(option => configuration.GetSection(nameof(MongoDbSettings)).Bind(option));
 
             services.AddSingleton<IMongoClient>(context =>
             {

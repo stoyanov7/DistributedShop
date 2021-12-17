@@ -1,5 +1,7 @@
 namespace DistributedShop.Identity
 {
+    using DistributedShop.Common.Authentication;
+    using DistributedShop.Common.Mediator;
     using DistributedShop.Common.Mongo;
     using DistributedShop.Common.Mongo.Contracts;
     using DistributedShop.Common.Mvc;
@@ -11,6 +13,7 @@ namespace DistributedShop.Identity
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.OpenApi.Models;
+    using System.Reflection;
 
     public class Startup
     {
@@ -23,7 +26,11 @@ namespace DistributedShop.Identity
             services
                 .AddInitializers(typeof(IMongoDbInitializer))
                 .AddMongoDatabase(this.Configuration)
+                .AddMongoRepositories()
                 .AddTransient<IPasswordHasher<User>, PasswordHasher<User>>()
+                .AddServices(Assembly.GetExecutingAssembly())
+                .AddMediator()
+                .AddJwt(this.Configuration)
                 .AddSwaggerGen(c =>
                 {
                     c.SwaggerDoc("v1", new OpenApiInfo { Title = "DistributedShop.Identity", Version = "v1" });
