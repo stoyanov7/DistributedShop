@@ -1,11 +1,17 @@
 namespace DistributedShop.Products
 {
+    using DistributedShop.Common.Mediator;
+    using DistributedShop.Common.Mongo;
+    using DistributedShop.Common.Mongo.Contracts;
+    using DistributedShop.Common.Mvc;
+    using DistributedShop.Products.Domain;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.OpenApi.Models;
+    using System.Reflection;
 
     public class Startup
     {
@@ -15,29 +21,35 @@ namespace DistributedShop.Products
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DistributedShop.Products", Version = "v1" });
-            });
+            services
+                .AddInitializers(typeof(IMongoDbInitializer))
+                .AddMongoDatabase(this.Configuration)
+                .AddScoped(typeof(IMongoRepository<Product>), typeof(MongoRepository<Product>))
+                .AddServices(Assembly.GetExecutingAssembly())
+                .AddMediator()
+                .AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DistributedShop.Products", Version = "v1" });
+                })
+                .AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IStartupInitializer startupInitializer)
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DistributedShop.Products v1"));
+                app
+                    .UseDeveloperExceptionPage()
+                    .UseSwagger()
+                    .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DistributedShop.Products v1"));
             }
 
-            app.UseHttpsRedirection();
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseHttpsRedirection()
+                .UseRouting()
+                .UseAuthorization()
+                .UseEndpoints(endpoints => endpoints.MapControllers());
+
+            startupInitializer.InitializeAsync();
         }
     }
 }
