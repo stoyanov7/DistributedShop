@@ -24,5 +24,13 @@
 
             return this.Accepted();
         }
+
+        protected ActionResult<T> Single<T>(T data)
+        {
+            if (data is null)
+                return this.NotFound();
+
+            return this.Ok(data);
+        }
     }
 }

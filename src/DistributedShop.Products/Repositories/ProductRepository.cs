@@ -2,6 +2,7 @@
 {
     using DistributedShop.Common.Mongo.Contracts;
     using DistributedShop.Products.Domain;
+    using System;
     using System.Threading.Tasks;
 
     public class ProductRepository : IProductRepository
@@ -9,6 +10,8 @@
         private readonly IMongoRepository<Product> mongoRepository;
 
         public ProductRepository(IMongoRepository<Product> mongoRepository) => this.mongoRepository = mongoRepository;
+
+        public async Task<Product> GetByIdAsync(Guid id) => await this.mongoRepository.GetByIdAsync(id);
 
         public async Task<bool> ExistsAsync(string name)
             => await this.mongoRepository.ExistsAsync(p => p.Name == name.ToLowerInvariant());

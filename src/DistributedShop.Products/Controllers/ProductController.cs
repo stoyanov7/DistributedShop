@@ -13,6 +13,11 @@
         {
         }
 
+        [HttpGet]
+        [Route(nameof(GetById) + PathSeparator + Id)]
+        public async Task<ActionResult<GetProductViewModel>> GetById([FromRoute] GetProductInputModel model)
+            => this.Single(await this.QueryAsync(model));
+
         [HttpPost]
         [Route(nameof(CreateProduct))]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductInputModel model)
