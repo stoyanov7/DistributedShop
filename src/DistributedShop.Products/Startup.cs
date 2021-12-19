@@ -4,13 +4,13 @@ namespace DistributedShop.Products
     using DistributedShop.Common.Mongo;
     using DistributedShop.Common.Mongo.Contracts;
     using DistributedShop.Common.Mvc;
+    using DistributedShop.Common.Swagger;
     using DistributedShop.Products.Domain;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Microsoft.OpenApi.Models;
     using System.Reflection;
 
     public class Startup
@@ -27,10 +27,7 @@ namespace DistributedShop.Products
                 .AddScoped(typeof(IMongoRepository<Product>), typeof(MongoRepository<Product>))
                 .AddServices(Assembly.GetExecutingAssembly())
                 .AddMediator()
-                .AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DistributedShop.Products", Version = "v1" });
-                })
+                .AddSwagger(this.Configuration)
                 .AddControllers();
         }
 
@@ -40,8 +37,7 @@ namespace DistributedShop.Products
             {
                 app
                     .UseDeveloperExceptionPage()
-                    .UseSwagger()
-                    .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DistributedShop.Products v1"));
+                    .UseSwagger();
             }
 
             app.UseHttpsRedirection()

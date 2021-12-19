@@ -5,6 +5,7 @@ namespace DistributedShop.Identity
     using DistributedShop.Common.Mongo;
     using DistributedShop.Common.Mongo.Contracts;
     using DistributedShop.Common.Mvc;
+    using DistributedShop.Common.Swagger;
     using DistributedShop.Identity.Domain;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -12,7 +13,6 @@ namespace DistributedShop.Identity
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Microsoft.OpenApi.Models;
     using System.Reflection;
 
     public class Startup
@@ -31,10 +31,7 @@ namespace DistributedShop.Identity
                 .AddServices(Assembly.GetExecutingAssembly())
                 .AddMediator()
                 .AddJwt(this.Configuration)
-                .AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DistributedShop.Identity", Version = "v1" });
-                })
+                .AddSwagger(this.Configuration)
                 .AddControllers();
         }
 
@@ -44,8 +41,7 @@ namespace DistributedShop.Identity
             {
                 app
                     .UseDeveloperExceptionPage()
-                    .UseSwagger()
-                    .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DistributedShop.Identity v1"));
+                    .UseSwagger();
             }
 
             app.UseHttpsRedirection()
