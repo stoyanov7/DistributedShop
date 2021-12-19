@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:4
+    container_name: mongo
+    ports:
+      - 27017:27017
+    restart: on-failure
+    networks:
+      - distributedshop-infrastructure
+    volumes:
+      - mongo:/data/db
+
+networks:
+   distributedshop-infrastructure:
+    name: distributedshop-infrastructure
+    external: true
+
+volumes:
+  mongo:
+    driver: local
