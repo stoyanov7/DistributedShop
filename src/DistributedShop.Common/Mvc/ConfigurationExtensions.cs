@@ -48,6 +48,9 @@
         public static T BindId<T>(this T model, Expression<Func<T, Guid>> expression)
            => model.Bind(expression, Guid.NewGuid());
 
+        public static T Bind<T>(this T model, Expression<Func<T, object>> expression, object value)
+           => model.Bind<T, object>(expression, value);
+
         private static TModel Bind<TModel, TProperty>(this TModel model, Expression<Func<TModel, TProperty>> expression,
             object value)
         {

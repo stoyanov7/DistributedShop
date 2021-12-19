@@ -4,6 +4,7 @@
     using DistributedShop.Common.Mvc;
     using DistributedShop.Products.Dto;
     using Microsoft.AspNetCore.Mvc;
+    using System;
     using System.Threading.Tasks;
 
     public class ProductController : ApiController
@@ -22,5 +23,15 @@
         [Route(nameof(CreateProduct))]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductInputModel model)
             => await this.SendAsync(model.BindId(x => x.Id));
+
+        [HttpPut]
+        [Route(nameof(UpdateProduct) + PathSeparator + Id)]
+        public async Task<IActionResult> UpdateProduct([FromRoute] Guid id, [FromBody] UpdateProductInputModel model)
+           => await this.SendAsync(model.Bind(x => x.Id, id));
+
+        [HttpDelete]
+        [Route(nameof(DeleteProduct))]
+        public async Task<IActionResult> DeleteProduct([FromRoute] DeleteProductInputModel model)
+            => await this.SendAsync(model);
     }
 }
