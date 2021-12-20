@@ -19,9 +19,8 @@ namespace DistributedShop.Products
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services
+        public void ConfigureServices(IServiceCollection services) 
+            => services
                 .AddInitializers(typeof(IMongoDbInitializer))
                 .AddMongoDatabase(this.Configuration)
                 .AddScoped(typeof(IMongoRepository<Product>), typeof(MongoRepository<Product>))
@@ -29,7 +28,6 @@ namespace DistributedShop.Products
                 .AddMediator()
                 .AddSwagger(this.Configuration)
                 .AddControllers();
-        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IStartupInitializer startupInitializer)
         {

@@ -22,8 +22,7 @@ namespace DistributedShop.Identity
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        {
-            services
+            => services
                 .AddInitializers(typeof(IMongoDbInitializer))
                 .AddMongoDatabase(this.Configuration)
                 .AddMongoRepositories()
@@ -33,7 +32,6 @@ namespace DistributedShop.Identity
                 .AddJwt(this.Configuration)
                 .AddSwagger(this.Configuration)
                 .AddControllers();
-        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IStartupInitializer startupInitializer)
         {

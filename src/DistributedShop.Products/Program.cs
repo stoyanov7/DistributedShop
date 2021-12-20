@@ -1,5 +1,6 @@
 namespace DistributedShop.Products
 {
+    using DistributedShop.Common.Logging;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
 
@@ -7,7 +8,7 @@ namespace DistributedShop.Products
     {
         public static void Main(string[] args) 
             => Host.CreateDefaultBuilder(args)
-                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
+                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>().UseLogging())
                  .Build()
                  .Run();
     }
